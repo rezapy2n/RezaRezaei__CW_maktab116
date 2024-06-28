@@ -1,25 +1,23 @@
-def is_palindrome(word):
-    
-    cleaned_word = ''.join(c.lower() for c in word if c.isalnum())
-    return cleaned_word == cleaned_word[::-1]
+class Temperature:
+    def __init__(self, celsius):
+        self.celsius = celsius
 
-def find_palindromic_words(filename):
-    palindromic_words = []
-    with open(filename, 'r') as file:
-        for line in file:
-            for word in line.split():
-                if len(word)>2 and is_palindrome(word):
-                    palindromic_words.append(word)
+    def to_fahrenheit(self):
+        return (self.celsius * 9/5) + 32
 
-    num_palindromic = len(palindromic_words)
-    return num_palindromic, palindromic_words
+    def to_celsius(self, fahrenheit):
+        return (fahrenheit - 32) * 5/9
 
-def main():
-    filename = "filepalindrom.txt"  
-    num_palindromic, palindromic_words = find_palindromic_words(filename)
+    @classmethod
+    def from_fahrenheit(cls, fahrenheit):
+        celsius = cls(fahrenheit).to_celsius(fahrenheit)
+        return cls(celsius)
 
-    print(f"Number of palindromic words: {num_palindromic}")
-    print(f"Palindromic words: {', '.join(palindromic_words)}")
 
-if __name__ == "__main__":
-    main()
+celsius_temp = 25
+fahrenheit_temp = 77
+
+
+temp_instance = Temperature.from_fahrenheit(fahrenheit_temp)
+
+print(f"{fahrenheit_temp}°F is approximately {temp_instance.celsius:.2f}°C")

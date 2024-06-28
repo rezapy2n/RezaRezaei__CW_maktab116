@@ -1,16 +1,14 @@
-def read_write(input_file,output_file):
+class Book:
+    def __init__(self, title, author, published_year):
+        self.title = title
+        self.author = author
+        self.published_year = published_year
 
-with open(input_file,'r') as fin:
+    def get_summary(self):
+        return f"{self.title} by {self.author}, published in {self.published_year}"
 
-data = fin.read()
 
-with open(output_file,'a+') as fout:
+my_book = Book(title="Love", author="reza.r", published_year=1377)
 
-fout.write(data)
-fout.write(' ')
 
-read_write('file1.txt','merged.txt')
-
-read_write('file2.txt','merged.txt')
-
-read_write('file3.txt','merged.txt')
+print(my_book.get_summary())
